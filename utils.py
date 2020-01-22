@@ -5,9 +5,10 @@ import statistics
 import timeit
 import copy
 
-testcase_exp = np.linspace(20, 70, num = 50, endpoint = False)
-testcase_trig = np.linspace(0, 2*np.pi, num = 100, endpoint = False)
 
+
+plt.style.use('seaborn-darkgrid')
+#--------------------------------------------------------------------------------------------------------------
 #Testing Function
 def theSeenAndTheUnseenTest(func1, func2, testcase) :
     
@@ -63,8 +64,10 @@ def theSeenAndTheUnseenTest(func1, func2, testcase) :
         ax[2].text(0.5, -0.17, "Average Error :" + str(avg_error)+ "% \n > 0.01%",
                    size=12, ha="center", transform=ax[2].transAxes)
         print(failed)
+#--------------------------------------------------------------------------------------------------------------
 
-
+#--------------------------------------------------------------------------------------------------------------
+#Finds Computation time
 def find_time(testcase, func):
     '''
     Calculates computation time for each testcase
@@ -78,6 +81,7 @@ def find_time(testcase, func):
     return time
     #return time, mean
 
+#Plots the list containing computation time
 def plot_time(testcase,plotNaive, **kwargs):
     '''
     This function plots two graphs
@@ -159,9 +163,10 @@ def plot_time(testcase,plotNaive, **kwargs):
         ax[1].set_ylabel("Speedup")                                     
         ax[1].legend(legend_list[1:])
         ax[1].set_xlabel(xlabel_speedup)
-     
+#--------------------------------------------------------------------------------------------------------------     
     
-
+#--------------------------------------------------------------------------------------------------------------
+#Plots Terms in a series
 def plot_term(terms, function, string) :
     '''
     This is a generic function
@@ -195,8 +200,10 @@ def plot_term(terms, function, string) :
             ax[i].set_ylabel(string);
             ax[i].set_xlabel('i');
             ax[i].text(5, l[i][5]+0.05, round(l[i][5],3), color = 'red')
+#--------------------------------------------------------------------------------------------------------------
 
-
+#--------------------------------------------------------------------------------------------------------------
+#plots the no.of iterations for every testcase for a given function
 def plot_iterations(testcase, function):
     itr = []
     
@@ -210,9 +217,9 @@ def plot_iterations(testcase, function):
     ax.text(testcase[0] - testcase[-1]*0.02, itr[0] + itr[-1]*0.01, itr[0], color = 'red')
     ax.text(testcase[-1] - testcase[-1]*0.02, itr[-1] + itr[-1]*0.01, itr[-1], color = 'red')
     ax.set_title('Iterations for '+ function.__name__)
-    
+#--------------------------------------------------------------------------------------------------------------    
 
-
+#--------------------------------------------------------------------------------------------------------------
 '''
     compare_functions() takes 4 parameters -function1, function2, function3, type of the function.
     Function 1 and 2 need to return a tuple containing value of series 
@@ -264,6 +271,6 @@ def compare_functions(func1, func2, func3, function, testcases):
     ax[1].legend([func1.__name__+"()",func2.__name__+"()",func3.__name__])
     ax[1].set_title("Values of "+function)
 
-
+#--------------------------------------------------------------------------------------------------------------
     
     
