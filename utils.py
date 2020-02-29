@@ -11,7 +11,19 @@ plt.style.use('seaborn-darkgrid')
 #--------------------------------------------------------------------------------------------------------------
 #Testing Function
 def theSeenAndTheUnseenTest(func1, func2, testcase) :
+    '''
+    A generic testing function 
+    Arguments:
+        func1 is the function to be tested
+        func2 is the inbuilt function
+        testcase is a list of testcases 
     
+    Output:
+        Graph1: Output of func1 against testcases
+        Graph2: Output of func2 against testcases
+        Graph3: Error plot
+    
+    '''
     ourvalues = []
     actualvalues = []
     error = []
@@ -54,8 +66,8 @@ def theSeenAndTheUnseenTest(func1, func2, testcase) :
 
     # Title when all testcases are passed
     if(avg_error < 0.01) :
-        fig.suptitle("All test cases passed, Accuracy: "+str(100-abs(avg_error)), fontsize = 12)
-        ax[2].set_xlabel("Average Error :" +str(avg_error)+ "% \n < 0.01%")
+        fig.suptitle("All test cases passed, Accuracy: "+str(100-abs(avg_error))+"%", fontsize = 12)
+        ax[2].set_xlabel("Average Error : ", '%.2f'avg_error, " % \n < 0.01%")
         #ax[2].text(0.5, -0.17, "Average Error :" +str(avg_error)+ "% \n < 0.01%",size=12, ha="center", transform=ax[2].transAxes)
     
     # Title when not all testcases are passed
@@ -70,16 +82,16 @@ def theSeenAndTheUnseenTest(func1, func2, testcase) :
 #Finds Computation time
 def find_time(testcase, func):
     '''
-    Calculates computation time for each testcase
-    Appends it in the list
-    And returns the list -> time[]
+    Finds the computation time of each
+    testcase for the function - 'func'.
+    Returns the computation time in 
+    list - 'time[]'
     '''
     time = []
     for i in testcase:
         t = timeit.Timer("func(i)", globals={"func": func, "i": i})
         time.append(t.timeit(number = 7))
     return time
-    #return time, mean
 
 #Plots the list containing computation time
 def plot_time(testcase,plotNaive, **kwargs):
@@ -95,7 +107,7 @@ def plot_time(testcase,plotNaive, **kwargs):
         don't plot naive runtime
         
     **kwargs is a dictionary of tuples - (list of time, function)
-    
+    This will help me compare any number of functions
     '''
     
     legend_list = []                        #legend for graph 1 - runtime
@@ -107,7 +119,7 @@ def plot_time(testcase,plotNaive, **kwargs):
     
     #iterating through kwargs
     for key, value in kwargs.items():
-        time_list.append(value[0])                     #value = (list of runtime for a function, function)      
+        time_list.append(value[0])                     #value is tuple of (list of runtime for a function, function)      
         avg_time.append(statistics.mean(value[0]))
         legend_list.append(value[1].__name__+"()")
         
@@ -205,6 +217,10 @@ def plot_term(terms, function, string) :
 #--------------------------------------------------------------------------------------------------------------
 #plots the no.of iterations for every testcase for a given function
 def plot_iterations(testcase, function):
+    '''
+    Plots the number of iteration taken by
+    the function for each value in testcase list
+    '''
     itr = []
     
     for i in testcase:
@@ -220,7 +236,9 @@ def plot_iterations(testcase, function):
 #--------------------------------------------------------------------------------------------------------------    
 
 #--------------------------------------------------------------------------------------------------------------
-'''
+
+def compare_functions(func1, func2, func3, function, testcases):
+    '''
     compare_functions() takes 4 parameters -function1, function2, function3, type of the function.
     Function 1 and 2 need to return a tuple containing value of series 
     and the number of itertations. 
@@ -229,9 +247,7 @@ def plot_iterations(testcase, function):
     compare_function will plot 2 graphs
     Graph 1 - Iterations taken by func1 and func2 
     Graph 2 - Values calculated by all 3 functions
-'''
-def compare_functions(func1, func2, func3, function, testcases):
-    
+    ''' 
     itr1 = []                       #iterations for func1
     itr2 = []                       #iterations for func2
     actual = []                     #actual ans for series
