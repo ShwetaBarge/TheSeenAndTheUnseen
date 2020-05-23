@@ -67,7 +67,7 @@ def theSeenAndTheUnseenTest(func1, func2, testcase) :
     # Title when all testcases are passed
     if(avg_error < 0.01) :
         fig.suptitle("All test cases passed, Accuracy: "+str(100-abs(avg_error))+"%", fontsize = 12)
-        ax[2].set_xlabel("Average Error : ", '%.2f'avg_error, " % \n < 0.01%")
+        ax[2].set_xlabel("Average Error : " + str(avg_error)+"%\n < 0.01%")
         #ax[2].text(0.5, -0.17, "Average Error :" +str(avg_error)+ "% \n < 0.01%",size=12, ha="center", transform=ax[2].transAxes)
     
     # Title when not all testcases are passed
